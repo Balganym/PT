@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace project2
+namespace @operator
 {
     class largenumber
     {
         public long a;
 
-        public largenumber( long a)
+        public largenumber(long a)
         {
             this.a = a;
         }
@@ -21,19 +21,6 @@ namespace project2
             return c3;
         }
 
-       public static largenumber operator -(largenumber c1, largenumber c2)
-        {
-            largenumber c3 = new largenumber(c1.a - c2.a);
-            return c3;
-        }
-
-        public static largenumber operator *(largenumber c1, largenumber c2)
-        {
-            largenumber c3 = new largenumber(c1.a * c2.a);
-            return c3;
-        }
-
-     
         public override string ToString()
         {
             return a + "";
@@ -43,16 +30,10 @@ namespace project2
     {
         static void Main(string[] args)
         {
-
-
-            largenumber c = new largenumber(5555);
-            largenumber d = new largenumber(1111);
-            largenumber w = c + d;
-            largenumber f = c - d;
-            largenumber k = c * d;
+            largenumber d = new largenumber(long.Parse(Console.ReadLine()));
+            largenumber k = new largenumber(long.Parse(Console.ReadLine()));
+            largenumber w = k + d;
             Console.WriteLine(w);
-            Console.WriteLine(f);
-            Console.WriteLine(k);
             Console.ReadKey();
         }
     }
