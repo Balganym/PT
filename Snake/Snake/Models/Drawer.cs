@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Snake.Models
 {
-    class Drawer
+    public class Drawer
     {
         public ConsoleColor color;
         public char sign;

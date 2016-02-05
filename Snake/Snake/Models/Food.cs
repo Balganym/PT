@@ -6,24 +6,43 @@ using System.Threading.Tasks;
 
 namespace Snake.Models
 {
-    class Food : Drawer
+    public class Food : Drawer
     {
         public Food()
         {
-            color = ConsoleColor.DarkRed;
+            color = ConsoleColor.Magenta;
             sign = '*';
         }
 
         public void NewRandomPosition()
-        {
-            int x = (new Random().Next()) % 30;
-            int y = (new Random().Next()) % 30;
-            if (body.Count == 0)
-                body.Add(new Point(x, y));
-            else {
-                body[0].x = x;
-                body[0].y = y;
+        {            
+            int x = 0, y = 0;            
+            bool find = false;
+            while (!find)
+            {
+                x = (new Random().Next()) % 49;
+                y = (new Random().Next()) % 24;
+                find = true;
+                for (int i = 0; i < Game.wall.body.Count - 1; i++)
+                {
+                    if (x == Game.wall.body[i].x && y == Game.wall.body[i].y || x==50 || y == 25 || x == 0 || y == 0)
+                    {
+                        find = false;
+                    }
+                }
             }
-        }
+            
+
+            if (body.Count == 0)
+            {                                  
+                body.Add(new Point(x, y));                            
+            }           
+            else
+            {           
+                body[0].x = x;
+                body[0].y = y;                            
+            }                  
+        }           
+       
     }
 }

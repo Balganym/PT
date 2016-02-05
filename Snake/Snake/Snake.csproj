@@ -47,6 +47,8 @@
     <Compile Include="Models\Food.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Point.cs" />
+    <Compile Include="Models\Snake.cs" />
+    <Compile Include="Models\Wall.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
