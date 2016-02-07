@@ -13,7 +13,12 @@ namespace Snake.Models
             
             color = ConsoleColor.Yellow;
             sign = 'O';
-            body.Add(new Point(10, 10));
+            int x, y;
+                x = (new Random().Next()) % 49;
+                y = (new Random().Next()) % 24;
+           
+                body.Add(new Point(x, y));      
+            
         }
 
         public void move(int dx, int dy)
@@ -53,15 +58,7 @@ namespace Snake.Models
             {
                 if (body[0].x == 0 && body[0].y == i || body[0].x == 50 && body[0].y == i)
                     Game.GameOver = true;
-            }
-
-            if (body.Count > 10)
-            {
-                int a = body[0].x;
-                int b = body[0].y;
-                body.Clear();
-                body.Add(new Point(a, b));
-            }
+            }            
             
         }           
 
