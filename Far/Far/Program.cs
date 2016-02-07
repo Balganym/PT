@@ -34,11 +34,11 @@ namespace FarManager
 
                     Console.WriteLine(items[i].Name);
                     Console.BackgroundColor = ConsoleColor.Black;
-                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Red;
                 }
 
 
-                ConsoleKeyInfo pressedKey = Console.ReadKey();
+                ConsoleKeyInfo pressedKey = Console.ReadKey();                
                 switch (pressedKey.Key)
                 {
                     
@@ -51,7 +51,7 @@ namespace FarManager
                     case ConsoleKey.Enter:
                         if (items[index].GetType() == typeof(DirectoryInfo))
                         {
-                            
+                            Console.Clear();
                             path = items[index].FullName;
                             dir = new DirectoryInfo(path);
                             items.Clear();
@@ -59,7 +59,7 @@ namespace FarManager
                             items.AddRange(dir.GetFiles());
                             index = 0;
                         }
-                        break;                    
+                        break;             
                 }
                 Console.Clear();
             }
