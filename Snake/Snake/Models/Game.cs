@@ -75,15 +75,13 @@ namespace Snake.Models
             snake.Save();
             wall.Save();
             food.Save();
-
         }
 
         public void Resume()
         {
             snake.Resume();
             wall.Resume();
-            food.Resume();
-           
+            food.Resume();           
         }
         public void Draw()
         {
