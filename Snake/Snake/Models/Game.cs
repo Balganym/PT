@@ -17,7 +17,7 @@ namespace Snake.Models
         public static Wall wall = new Wall(level);
 
         public Game()
-        {            
+        {   
             Init();
             Play();
         }
@@ -27,15 +27,16 @@ namespace Snake.Models
             while (!GameOver)
             {
                 Draw();
-                if (Game.snake.body.Count() == 3)
-                {
+                if (Game.snake.body.Count() == 3 + level)
+                {                    
                     level += 1;
                     wall = new Wall(level);
-                    
+
                         int a = Game.snake.body[0].x;
                         int b = Game.snake.body[0].y;
                         Game.snake.body.Clear();
-                    
+                        Game.food.body.Clear();
+                        Init();                 
 
                      Game.snake.body.Add(new Point(a, b));                    
                 }
@@ -66,8 +67,7 @@ namespace Snake.Models
 
         public void Init()
         {
-            food.NewRandomPosition();
-            snake.body.Add(new Point(10, 10));
+            food.NewRandomPosition();           
         }
 
         public void Save()

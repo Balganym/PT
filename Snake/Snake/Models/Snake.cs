@@ -34,8 +34,7 @@ namespace Snake.Models
             body[0].y += dy;
 
             if (body[0].x == Game.food.body[0].x && body[0].y == Game.food.body[0].y)
-            {
-                
+            {                
                 Game.food.NewRandomPosition();
                 body.Add(new Point(body[0].x, body[0].y));                
             }
