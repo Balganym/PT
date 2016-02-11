@@ -46,13 +46,35 @@ namespace Snake.Models
                               
                 ConsoleKeyInfo button = Console.ReadKey();
                 if (button.Key == ConsoleKey.LeftArrow)
-                    snake.move(-1, 0);
+                {
+                    if(Game.snake.body.Count > 1 && Game.snake.body[0].x - 1 != Game.snake.body[1].x)
+                        snake.move(-1, 0);                
+                    if(Game.snake.body.Count == 1)
+                        snake.move(-1, 0);
+                    
+                }
                 if (button.Key == ConsoleKey.RightArrow)
-                    snake.move(1, 0);
+                {
+                    if((Game.snake.body.Count > 1 && Game.snake.body[0].x + 1 != Game.snake.body[1].x))
+                        snake.move(1, 0);
+                    if(Game.snake.body.Count == 1)
+                        snake.move(1, 0);
+                }
+
                 if (button.Key == ConsoleKey.UpArrow)
-                    snake.move(0, -1);
+                {
+                    if (Game.snake.body.Count > 1 && Game.snake.body[0].y - 1 != Game.snake.body[1].y)
+                        snake.move(0, -1);
+                    if(Game.snake.body.Count == 1)
+                        snake.move(0, -1);
+                }
                 if (button.Key == ConsoleKey.DownArrow)
-                    snake.move(0, 1);
+                {
+                    if(Game.snake.body.Count > 1 && Game.snake.body[0].y + 1 != Game.snake.body[1].y)
+                        snake.move(0, 1);
+                    if(Game.snake.body.Count == 1)
+                        snake.move(0, 1);
+                }
                 if (button.Key == ConsoleKey.F2)
                     Save();
                 if (button.Key == ConsoleKey.F3)
