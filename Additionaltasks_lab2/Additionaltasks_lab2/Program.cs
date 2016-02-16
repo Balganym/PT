@@ -12,15 +12,15 @@ namespace Additionaltask_lab2
 
         static void Main(string[] args)
         {
-            string path = @"C:\Users\Useer\Desktop\Balganym";
+            string path = @"C:\Users\Useer\Desktop\Balganym";  
             DirectoryInfo d = new DirectoryInfo(path);
 
             int index = 0;
-            List<FileSystemInfo> folders_files = new List<FileSystemInfo>();
-            folders_files.AddRange(d.GetDirectories());
-            folders_files.AddRange(d.GetFiles());
+            List<FileSystemInfo> folders_files = new List<FileSystemInfo>(); 
+            folders_files.AddRange(d.GetDirectories()); 
+            folders_files.AddRange(d.GetFiles()); 
 
-            bool files_folders = false;
+            bool files_folders = false; 
             while (true)
             {
                 if (files_folders == false)
@@ -69,7 +69,7 @@ namespace Additionaltask_lab2
                 }
                 if (button.Key == ConsoleKey.DownArrow)
                 {
-                    Console.Clear();
+                   // Console.Clear();
                     if (index < folders_files.Count - 1)
                         index++;
                 }
@@ -98,10 +98,24 @@ namespace Additionaltask_lab2
 
                 }
                 if (button.Key == ConsoleKey.Escape)
-                {
-                    files_folders = false;
-                    Console.Clear();
-                }
+                    if (folders_files[index].GetType() == typeof(FileInfo))
+                    {
+                        {
+                            files_folders = false;
+                            Console.Clear();
+                        }
+                    }
+
+                    else
+                    {
+                        Console.Clear();
+                         path = d.Parent.FullName;           //путь приравнивает к предыдущему путю                 
+                         d = new DirectoryInfo(path);
+                         folders_files.Clear();
+                         folders_files.AddRange(d.GetDirectories());
+                         folders_files.AddRange(d.GetFiles());
+                         index = 0;                       
+                    }
             }
         }
     }
