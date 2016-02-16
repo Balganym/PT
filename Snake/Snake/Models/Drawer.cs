@@ -32,17 +32,17 @@ namespace Snake.Models
         {
             string FileName = "";
             if (sign == 'O')
-                FileName = "snake.dat";
+                FileName = "snake.xml";
             if (sign == '*')
-                FileName = "food.dat";
+                FileName = "food.xml";
             if (sign == '=')
-                FileName = "wall.dat";
+                FileName = "wall.xml";
 
             FileStream fs = new FileStream(FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            //XmlSerializer xs = new XmlSerializer(GetType());
-            BinaryFormatter bf = new BinaryFormatter();
-            //xs.Serialize(fs, this);
-            bf.Serialize(fs, this);
+            XmlSerializer xs = new XmlSerializer(GetType());
+            //BinaryFormatter bf = new BinaryFormatter();
+            xs.Serialize(fs, this);
+            //bf.Serialize(fs, this);
             fs.Close();
         }
 
@@ -50,23 +50,23 @@ namespace Snake.Models
         {
             string FileName = "";
             if (sign == 'O')
-                FileName = "snake.dat";
+                FileName = "snake.xml";
             if (sign == '*')
-                FileName = "food.dat";
+                FileName = "food.xml";
             if (sign == '=')
-                FileName = "wall.dat";
+                FileName = "wall.xml";
 
             FileStream fs = new FileStream(FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            //XmlSerializer xs = new XmlSerializer(GetType());
-            BinaryFormatter bf = new BinaryFormatter();
+            XmlSerializer xs = new XmlSerializer(GetType());
+            //BinaryFormatter bf = new BinaryFormatter();
 
             if (sign == '*')
-                Game.food = bf.Deserialize(fs) as Food;
+                Game.food = xs.Deserialize(fs) as Food;
             if (sign == '=')
-                Game.wall = bf.Deserialize(fs) as Wall;
+                Game.wall = xs.Deserialize(fs) as Wall;
 
             if (sign == 'O')
-                Game.snake = bf.Deserialize(fs) as Snake;
+                Game.snake = xs.Deserialize(fs) as Snake;
 
             fs.Close();
 

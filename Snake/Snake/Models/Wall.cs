@@ -15,6 +15,10 @@ namespace Snake.Models
             sign = '=';
             Init(level);   
         }
+        public Wall()
+        {
+
+        }
 
         public void Init(int level)
         {

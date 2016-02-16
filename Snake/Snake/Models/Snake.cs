@@ -8,6 +8,7 @@ namespace Snake.Models
 {
     public class Snake : Drawer
     {
+        
         public Snake()
         {
             

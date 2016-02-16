@@ -14,5 +14,10 @@ namespace Snake.Models
             this.x = x;
             this.y = y;
         }
+
+        public Point()
+        {
+
+        }
     }
 }

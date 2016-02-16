@@ -47,11 +47,11 @@ namespace Snake.Models
                 ConsoleKeyInfo button = Console.ReadKey();
                 if (button.Key == ConsoleKey.LeftArrow)
                 {
-                    if(Game.snake.body.Count > 1 && Game.snake.body[0].x - 1 != Game.snake.body[1].x)
-                        snake.move(-1, 0);                
-                    if(Game.snake.body.Count == 1)
+                    if (Game.snake.body.Count > 1 && Game.snake.body[0].x - 1 != Game.snake.body[1].x)
                         snake.move(-1, 0);
-                    
+
+                    if (Game.snake.body.Count == 1)
+                        snake.move(-1, 0);
                 }
                 if (button.Key == ConsoleKey.RightArrow)
                 {
@@ -63,8 +63,9 @@ namespace Snake.Models
 
                 if (button.Key == ConsoleKey.UpArrow)
                 {
-                    if (Game.snake.body.Count > 1 && Game.snake.body[0].y - 1 != Game.snake.body[1].y)
+                    if (Game.snake.body.Count > 1 && Game.snake.body[0].y - 1 != Game.snake.body[1].y)                   
                         snake.move(0, -1);
+                          
                     if(Game.snake.body.Count == 1)
                         snake.move(0, -1);
                 }
@@ -79,26 +80,24 @@ namespace Snake.Models
                     Save();
                 if (button.Key == ConsoleKey.F3)
                     Resume();               
-            }
+            }          
             
             Console.SetCursorPosition(18, 12);
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("GAME OVER");
             Console.ReadKey();
-        }
+        }        
 
         public void Init()
         {
             food.NewRandomPosition();           
         }
-
         public void Save()
         {
             snake.Save();
             wall.Save();
             food.Save();
         }
-
         public void Resume()
         {
             snake.Resume();
