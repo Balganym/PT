@@ -17,7 +17,7 @@ namespace Snake.Models
 
         public Drawer() { }
 
-        public void Draw()
+        public virtual void Draw()
         {
             Console.ForegroundColor = color;
             foreach (Point p in body)
@@ -27,18 +27,18 @@ namespace Snake.Models
             }
 
         }
-
+   
         public void Save()
         {
             string FileName = "";
-            if (sign == 'O')
+            if (sign == 'o')
                 FileName = "snake.xml";
             if (sign == '*')
                 FileName = "food.xml";
             if (sign == '=')
                 FileName = "wall.xml";
 
-            FileStream fs = new FileStream(FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            FileStream fs = new FileStream(FileName, FileMode.Create, FileAccess.ReadWrite);
             XmlSerializer xs = new XmlSerializer(GetType());
             //BinaryFormatter bf = new BinaryFormatter();
             xs.Serialize(fs, this);
@@ -49,14 +49,14 @@ namespace Snake.Models
         public void Resume()
         {
             string FileName = "";
-            if (sign == 'O')
+            if (sign == 'o')
                 FileName = "snake.xml";
             if (sign == '*')
                 FileName = "food.xml";
             if (sign == '=')
                 FileName = "wall.xml";
 
-            FileStream fs = new FileStream(FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            FileStream fs = new FileStream(FileName, FileMode.Open, FileAccess.ReadWrite);
             XmlSerializer xs = new XmlSerializer(GetType());
             //BinaryFormatter bf = new BinaryFormatter();
 
@@ -65,7 +65,7 @@ namespace Snake.Models
             if (sign == '=')
                 Game.wall = xs.Deserialize(fs) as Wall;
 
-            if (sign == 'O')
+            if (sign == 'o')
                 Game.snake = xs.Deserialize(fs) as Snake;
 
             fs.Close();

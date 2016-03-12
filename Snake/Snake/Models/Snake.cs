@@ -8,28 +8,71 @@ namespace Snake.Models
 {
     public class Snake : Drawer
     {
-        
+      
         public Snake()
-        {
-            
+        {           
             color = ConsoleColor.Yellow;
-            sign = 'O';
-            int x, y;
-                x = (new Random().Next()) % 49;
-                y = (new Random().Next()) % 24;
-           
-                body.Add(new Point(x, y));      
+            sign = 'o';
+            random();
             
+           int x, y;                                        
+            x = (new Random().Next()) % 49;
+            y = (new Random().Next()) % 24;
+            body.Add(new Point(x, y));
         }
 
+        public override void Draw()
+        {
+            for (int i = 0; i < body.Count; i++)
+            {
+                if (i == 0)
+                {                    
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.SetCursorPosition(body[i].x, body[i].y);
+                    Console.Write("O");                                
+                }
+                else {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.SetCursorPosition(body[i].x, body[i].y);
+                    Console.Write(sign);
+                }
+            }
+        }
+          public void random()
+         {
+             int x, y;
+             bool yes = false;
+             while (yes)
+             {
+                 x = (new Random().Next()) % 49;
+                 y = (new Random().Next()) % 24;
+                 for (int i = 0; i < Game.wall.body.Count; i++)
+                 {
+                     if (x != Game.wall.body[i].x && y != Game.wall.body[i].y)
+                     {
+                         body.Add(new Point(x, y));
+                         yes = true;
+                         break;
+                     }
+                 }
+             }
+
+         }
         public void move(int dx, int dy)
         {
+            Console.SetCursorPosition(body[body.Count - 1].x, body[body.Count - 1].y);
+            Console.Write(" ");
             for (int i = body.Count - 1; i > 0; i--)
             {
                 body[i].x = body[i - 1].x;
                 body[i].y = body[i - 1].y;
             }
             int k = body.Count;
+
+            if (body[0].x + dx < 0) dx = dx + 49;
+            if (body[0].y + dy < 0) dy = dy + 49;
+            if (body[0].x + dx > 50) dx = dx - 49;
+            if (body[0].y + dy > 50) dy = dy - 49;
 
             body[0].x += dx;
             body[0].y += dy;
@@ -47,7 +90,7 @@ namespace Snake.Models
                     Game.GameOver = true;
                 }
             }
-
+           /*
             for (int i = 0; i <= 50; i++)
             {
                 if (body[0].x == i && body[0].y == 0 || body[0].x == i && body[0].y == 25)
@@ -58,10 +101,8 @@ namespace Snake.Models
             {
                 if (body[0].x == 0 && body[0].y == i || body[0].x == 50 && body[0].y == i)
                     Game.GameOver = true;
-            }            
+            }   */         
             
-        }           
-
-        
+        }       
     }
 }
