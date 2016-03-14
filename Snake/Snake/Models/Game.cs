@@ -32,12 +32,12 @@ namespace Snake.Models
 
         public void Play()
         {           
-            Console.SetWindowSize(50, 25);
+            Console.SetWindowSize(60, 32);
             Thread t = new Thread(MoveSnake);
-
-            //Timer t = new Timer(MoveSnake);
-           // t.Change(0, 200);
             t.Start();
+            //Timer t = new Timer(MoveSnake);
+            // t.Change(0, 200);
+
 
             while (!GameOver)
             {
@@ -45,7 +45,7 @@ namespace Snake.Models
                 if (Game.snake.body.Count() == 3 + level)
                 {
                     level += 1;
-                    speed -= 50;                  
+                    speed -= 40;                  
                     wall = new Wall(level);
                     int a = Game.snake.body[0].x;
                     int b = Game.snake.body[0].y;                                                                            
@@ -58,52 +58,58 @@ namespace Snake.Models
                 }
                             
                 ConsoleKeyInfo button = Console.ReadKey();
+                         
                 if (button.Key == ConsoleKey.LeftArrow)
                 {
-                    if (Game.snake.body.Count > 1 && Game.snake.body[0].x - 1 != Game.snake.body[1].x)
-                        dir = Direction.left;
-                    if (Game.snake.body.Count == 1)
-                        dir = Direction.left;
+                    if ((Game.snake.body.Count > 1 && Game.snake.body[0].x - 1 != Game.snake.body[1].x) 
+                            || Game.snake.body.Count == 1)
+                        dir = Direction.left;                    
                 }
                 if (button.Key == ConsoleKey.RightArrow)
                 {
-                    if ((Game.snake.body.Count > 1 && Game.snake.body[0].x + 1 != Game.snake.body[1].x))
-                        dir = Direction.right;
-                    if (Game.snake.body.Count == 1)
-                        dir = Direction.right;
+                    if ((Game.snake.body.Count > 1 && Game.snake.body[0].x + 1 != Game.snake.body[1].x)
+                            || Game.snake.body.Count == 1)
+                        dir = Direction.right;                   
                 }
                 if (button.Key == ConsoleKey.UpArrow)
                 {
-                    if (Game.snake.body.Count > 1 && Game.snake.body[0].y - 1 != Game.snake.body[1].y)
-                        dir = Direction.up;
-                    if (Game.snake.body.Count == 1)
-                        dir = Direction.up;
+                    if ((Game.snake.body.Count > 1 && Game.snake.body[0].y - 1 != Game.snake.body[1].y) 
+                            || Game.snake.body.Count == 1)
+                        dir = Direction.up;                    
                 }
                 if (button.Key == ConsoleKey.DownArrow)
                 {
-                    if (Game.snake.body.Count > 1 && Game.snake.body[0].y + 1 != Game.snake.body[1].y)
-                        dir = Direction.down;
-                    if (Game.snake.body.Count == 1)
-                        dir = Direction.down;
+                    if ((Game.snake.body.Count > 1 && Game.snake.body[0].y + 1 != Game.snake.body[1].y)
+                            || Game.snake.body.Count == 1)
+                        dir = Direction.down;                    
                 }
                 if (button.Key == ConsoleKey.Escape)
                     break;
                 if (button.Key == ConsoleKey.F2)
                     Save();
                 if (button.Key == ConsoleKey.F3)
-                    Resume();
+                    Resume();                
             }            
                 
             if (GameOver == true)
             {
-                Console.SetCursorPosition(18, 12);
+                Console.SetCursorPosition(30, 15);
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("GAME OVER");
-                Console.ReadKey();
+                ConsoleKeyInfo newgame = Console.ReadKey();
+                if (newgame.Key == ConsoleKey.F10)
+                {
+                    GameOver = false;
+                    Console.Clear();
+                    //level = 1;
+                    Draw();
+                    Game.wall.Draw();
+                    Play();
+                }                   
+                
             }
              else
             {
-
             }
         }
 
@@ -120,8 +126,7 @@ namespace Snake.Models
                     snake.move(0, -1);
                 if (dir == Direction.down)
                     snake.move(0, 1);
-                Draw();                      
-                 
+                Draw();         
                 Thread.Sleep(speed);
             }           
 
@@ -147,7 +152,7 @@ namespace Snake.Models
         {            
             food.Draw();
             snake.Draw();
-            Console.SetCursorPosition(0, 0);
+            Console.SetCursorPosition(22, 31);
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Food: {0}, level: {1}", Game.snake.body.Count(), level);
             if (level == 1)

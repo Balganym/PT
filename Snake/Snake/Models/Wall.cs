@@ -10,7 +10,7 @@ namespace Snake.Models
     public class Wall : Drawer
     {
         public Wall(int level)
-        {
+        { 
             color = ConsoleColor.Red;
             sign = '=';
             Init(level);   

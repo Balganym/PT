@@ -16,8 +16,8 @@ namespace Snake.Models
             random();
             
            int x, y;                                        
-            x = (new Random().Next()) % 49;
-            y = (new Random().Next()) % 24;
+            x = (new Random().Next()) % 60;
+            y = (new Random().Next()) % 30;
             body.Add(new Point(x, y));
         }
 
@@ -44,8 +44,8 @@ namespace Snake.Models
              bool yes = false;
              while (yes)
              {
-                 x = (new Random().Next()) % 49;
-                 y = (new Random().Next()) % 24;
+                 x = (new Random().Next()) % 60;
+                 y = (new Random().Next()) % 30;
                  for (int i = 0; i < Game.wall.body.Count; i++)
                  {
                      if (x != Game.wall.body[i].x && y != Game.wall.body[i].y)
@@ -60,8 +60,13 @@ namespace Snake.Models
          }
         public void move(int dx, int dy)
         {
-            Console.SetCursorPosition(body[body.Count - 1].x, body[body.Count - 1].y);
-            Console.Write(" ");
+            if (body.Count > 0)
+            {
+                
+                Console.SetCursorPosition(body[body.Count - 1].x, body[body.Count - 1].y);
+                Console.Write(" ");
+            }
+            
             for (int i = body.Count - 1; i > 0; i--)
             {
                 body[i].x = body[i - 1].x;
@@ -69,10 +74,10 @@ namespace Snake.Models
             }
             int k = body.Count;
 
-            if (body[0].x + dx < 0) dx = dx + 49;
-            if (body[0].y + dy < 0) dy = dy + 49;
-            if (body[0].x + dx > 50) dx = dx - 49;
-            if (body[0].y + dy > 50) dy = dy - 49;
+            if (body[0].x + dx < 0) dx = dx + 60;
+            if (body[0].y + dy < 0) dy = dy + 30;
+            if (body[0].x + dx > 60) dx = dx - 60;
+            if (body[0].y + dy > 30) dy = dy - 30;
 
             body[0].x += dx;
             body[0].y += dy;
@@ -91,15 +96,14 @@ namespace Snake.Models
                 }
             }
            /*
-            for (int i = 0; i <= 50; i++)
+            for (int i = 0; i <= 60; i++)
             {
-                if (body[0].x == i && body[0].y == 0 || body[0].x == i && body[0].y == 25)
+                if (body[0].x == i && body[0].y == 0 || body[0].x == i && body[0].y == 30)
                     Game.GameOver = true;    
             }
-
-            for (int i = 0; i<=25; i++)
+            for (int i = 0; i<=30; i++)
             {
-                if (body[0].x == 0 && body[0].y == i || body[0].x == 50 && body[0].y == i)
+                if (body[0].x == 0 && body[0].y == i || body[0].x == 60 && body[0].y == i)
                     Game.GameOver = true;
             }   */         
             
