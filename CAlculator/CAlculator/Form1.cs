@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace CAlculator
 {   
+    
     public partial class Form1 : Form
     {
         private Calc c = new Calc();
@@ -22,11 +23,9 @@ namespace CAlculator
         {            
             InitializeComponent();
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
         }
-
         private void Num_click(object sender, EventArgs e)
         {
             res = false;
@@ -36,7 +35,6 @@ namespace CAlculator
             display.Text += btn.Text;
             m = false;         
         }
-
         private void Operation_click(object sender, EventArgs e)
         {
             res = false;
@@ -46,7 +44,6 @@ namespace CAlculator
             display.Text = "";
             equation.Text = c.first + " " + c.operation;      
         }
-
         private void result_click(object sender, EventArgs e)
         {
             
@@ -59,20 +56,18 @@ namespace CAlculator
             else
             {
                 if(c.operation == "+")
-                c.Result = c.second + double.Parse(display.Text);
+                    c.Result = c.second + double.Parse(display.Text);
                 if (c.operation == "-")
                     c.Result = double.Parse(display.Text) - c.second;
                 if (c.operation == "*")
                     c.Result = c.second * double.Parse(display.Text);
                 if (c.operation == "/")
                     c.Result = double.Parse(display.Text) / c.second;
-
             }       
             equation.Text = "";
             display.Text = c.Result.ToString();
             res = true;                  
-        }       
-
+        }
         private void Clear_all(object sender, EventArgs e)
         {
             res = false;
@@ -83,13 +78,11 @@ namespace CAlculator
             c.operation = "";
             display.Text = "0";
         }
-
         private void last_Click(object sender, EventArgs e)
         {
             res = false;            
                 display.Text = "0"; 
         }
-
         private void one_operation(object sender, EventArgs e)
         {
             res = false;
@@ -104,9 +97,8 @@ namespace CAlculator
             {
                 double number = Double.Parse(display.Text);
                 display.Text = (1/number).ToString();
-            }                  
+            }                       
         }
-
         private void factorial(object sender, EventArgs e)
         {
             res = false;
@@ -116,34 +108,35 @@ namespace CAlculator
             for (int i = 2; i<= fact; i++)            
                 f *= i;
             display.Text = Convert.ToString(f);
-
         }
-
         private void backspace(object sender, EventArgs e)
         {
-            if (display.Text != "" && display.Text != "0")
+            
+            if(display.Text.Length == 1)
             {
-                display.Text = display.Text.Remove(display.Text.Length - 1, 1);                 
+                display.Text = "0";
             }
             else
             {
-                return;
-            }
+                display.Text = display.Text.Remove(display.Text.Length - 1);
+            }            
         }
-
         private void dot(object sender, EventArgs e)
         {
             if (!display.Text.Contains(","))
-                display.Text = display.Text + ",";
+            {
+                if (display.Text == "")
+                    display.Text = "0,";
+                else
+                    display.Text = display.Text + ",";
+            }           
             else
                 return;
         }
-
         private void m_clear(object sender, EventArgs e)
         {
             save = 0;
         }
-
         private void m_save(object sender, EventArgs e)
         {
             if (display.Text != "")
@@ -151,28 +144,27 @@ namespace CAlculator
             else
                 return;
             m = true;                     
-        }       
+        }    
 
         private void m_return(object sender, EventArgs e)
         {
             display.Text = save.ToString();
             m = true;
         }
-
         private void m_plus(object sender, EventArgs e)
         {
             save += double.Parse(display.Text);
         }
-
         private void m_minus(object sender, EventArgs e)
         {
             save -= double.Parse(display.Text);
         }
-
         private void plus_minus(object sender, EventArgs e)
         {
             display.Text = (double.Parse(display.Text) * -1).ToString();
         }
-        
+        private void display_TextChanged(object sender, EventArgs e)
+        {
+        }
     }
 }
