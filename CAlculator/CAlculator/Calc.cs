@@ -10,11 +10,11 @@ namespace CAlculator
     {
         public double first, second;
         private double result;
-        public string operation;       
+        public string oper;       
 
         public void calculate()
         {
-            switch (operation)
+            switch (oper)
             {
                 case "+":
                     result = first + second;
